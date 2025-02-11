@@ -5,14 +5,16 @@
 
 #include "../ui.h"
 
-void ui_Screen1_screen_init(void)
+int line_count = 0;
+
+void ui_AppUART_screen_init(void)
 {
-    ui_Screen1 = lv_obj_create(NULL);
-    lv_obj_remove_flag(ui_Screen1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    ui_AppUART = lv_obj_create(NULL);
+    lv_obj_remove_flag(ui_AppUART, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
 // *********** BAUDRATE ***********
 
-    ui_baudrate = lv_dropdown_create(ui_Screen1);
+    ui_baudrate = lv_dropdown_create(ui_AppUART);
     lv_dropdown_set_options(ui_baudrate, "115200\n57600\n19200\n9600");
     lv_obj_set_width(ui_baudrate, 99);
     lv_obj_set_height(ui_baudrate, LV_SIZE_CONTENT);    /// 1
@@ -33,18 +35,18 @@ void ui_Screen1_screen_init(void)
 
 // *********** CONNECT ***********
 
-    ui_Label4 = lv_label_create(ui_Screen1);
+    ui_Label4 = lv_label_create(ui_AppUART);
     lv_obj_set_width(ui_Label4, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Label4, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Label4, 263);
+    lv_obj_set_x(ui_Label4, 240);
     lv_obj_set_y(ui_Label4, 215);
     lv_obj_set_align(ui_Label4, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label4, "Connect");
 
-    ui_SwitchStartStop = lv_switch_create(ui_Screen1);
-    lv_obj_set_width(ui_SwitchStartStop, 50);
-    lv_obj_set_height(ui_SwitchStartStop, 25);
-    lv_obj_set_x(ui_SwitchStartStop, 325);
+    ui_SwitchStartStop = lv_switch_create(ui_AppUART);
+    lv_obj_set_width(ui_SwitchStartStop, 70);
+    lv_obj_set_height(ui_SwitchStartStop, 35);
+    lv_obj_set_x(ui_SwitchStartStop, 315);
     lv_obj_set_y(ui_SwitchStartStop, 215);
     lv_obj_set_align(ui_SwitchStartStop, LV_ALIGN_CENTER);
     // lv_obj_add_state(ui_SwitchStartStop, LV_STATE_CHECKED);       /// States
@@ -56,7 +58,7 @@ void ui_Screen1_screen_init(void)
 
 // *********** DEVICE 1 ***********
 
-    ui_edevice1 = lv_checkbox_create(ui_Screen1);
+    ui_edevice1 = lv_checkbox_create(ui_AppUART);
     lv_checkbox_set_text(ui_edevice1, "Device 1");
     lv_obj_set_width(ui_edevice1, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_edevice1, LV_SIZE_CONTENT);    /// 1
@@ -77,7 +79,7 @@ void ui_Screen1_screen_init(void)
 
 // *********** DEVICE 2 ***********
 
-    ui_edevice2 = lv_checkbox_create(ui_Screen1);
+    ui_edevice2 = lv_checkbox_create(ui_AppUART);
     lv_checkbox_set_text(ui_edevice2, "Device 2");
     lv_obj_set_width(ui_edevice2, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_edevice2, LV_SIZE_CONTENT);    /// 1
@@ -98,7 +100,7 @@ void ui_Screen1_screen_init(void)
 
 // *********** SWITCH ASCII / HEX ***********
 
-    ui_Label3 = lv_label_create(ui_Screen1);
+    ui_Label3 = lv_label_create(ui_AppUART);
     lv_obj_set_width(ui_Label3, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Label3, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_x(ui_Label3, 0);
@@ -106,7 +108,7 @@ void ui_Screen1_screen_init(void)
     lv_obj_set_align(ui_Label3, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label3, "Ascii");
 
-    ui_SwitchAscii = lv_switch_create(ui_Screen1);
+    ui_SwitchAscii = lv_switch_create(ui_AppUART);
     lv_obj_set_width(ui_SwitchAscii, 50);
     lv_obj_set_height(ui_SwitchAscii, 25);
     lv_obj_set_x(ui_SwitchAscii, 50);
@@ -120,7 +122,7 @@ void ui_Screen1_screen_init(void)
                                             _ui_theme_alpha_Orange);
 
 
-    ui_Label1 = lv_label_create(ui_Screen1);
+    ui_Label1 = lv_label_create(ui_AppUART);
     lv_obj_set_width(ui_Label1, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Label1, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_x(ui_Label1, 101);
@@ -128,7 +130,7 @@ void ui_Screen1_screen_init(void)
     lv_obj_set_align(ui_Label1, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label1, "HEX");
 
-    ui_SwitchHEX = lv_switch_create(ui_Screen1);
+    ui_SwitchHEX = lv_switch_create(ui_AppUART);
     lv_obj_set_width(ui_SwitchHEX, 50);
     lv_obj_set_height(ui_SwitchHEX, 25);
     lv_obj_set_x(ui_SwitchHEX, 149);
@@ -144,7 +146,7 @@ void ui_Screen1_screen_init(void)
 
 // *********** SPINER ***********
 
-    ui_Spinner = lv_spinner_create(ui_Screen1);
+    ui_Spinner = lv_spinner_create(ui_AppUART);
     //lv_spinner_set_anim_params(ui_Spinner, 1000, 90);
     lv_obj_set_width(ui_Spinner, 35);
     lv_obj_set_height(ui_Spinner, 35);
@@ -164,7 +166,7 @@ void ui_Screen1_screen_init(void)
 
 // *********** CONTAINER ***********
 
-    ui_Container1 = lv_obj_create(ui_Screen1);
+    ui_Container1 = lv_obj_create(ui_AppUART);
     lv_obj_remove_style_all(ui_Container1);
     lv_obj_set_width(ui_Container1, 800);
     lv_obj_set_height(ui_Container1, 430);
@@ -178,6 +180,7 @@ void ui_Screen1_screen_init(void)
 
 // *********** EVENTS ***********
 
+    lv_obj_add_event_cb(ui_AppUART, ui_event_AppUART, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_baudrate, ui_event_baudrate, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_SwitchStartStop, ui_event_SwitchStartStop, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_edevice1, ui_event_edevice1, LV_EVENT_ALL, NULL);
@@ -191,4 +194,63 @@ void ui_Screen1_screen_init(void)
     uic_Spinner = ui_Spinner;
     uic_SwitchHEX = ui_SwitchHEX;
     uic_SwitchAscii = ui_SwitchAscii;
+}
+
+void add_colored_log(const char* timestamp, uint32_t timestamp_color_hex,
+    const char* hexa, uint32_t hexa_color_hex,
+    const char* message, uint32_t message_color_hex)
+{
+    // Create a container to group the entire log entry
+    lv_obj_t * log_entry = lv_obj_create(ui_Container1);
+    lv_obj_set_size(log_entry, LV_PCT(100), LV_SIZE_CONTENT);
+    lv_obj_set_flex_flow(log_entry, LV_FLEX_FLOW_ROW_WRAP);
+    lv_obj_set_flex_align(log_entry, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START);
+    lv_obj_set_style_pad_all(log_entry, 0, 0);  // Optional: Adjust spacing
+    lv_obj_set_style_border_width(log_entry, 0, 0);
+    lv_obj_set_style_bg_opa(log_entry, LV_OPA_TRANSP, 0); // Transparent background
+
+    // Timestamp
+    lv_obj_t * label_ts  = lv_label_create(log_entry);
+    lv_label_set_text(label_ts , timestamp);
+    lv_obj_set_style_text_color(label_ts , lv_color_hex(timestamp_color_hex), 0);
+    lv_obj_set_width(label_ts, LV_PCT(13));
+    lv_obj_set_style_text_font(label_ts, &ui_font_Font1, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_label_set_long_mode(label_ts, LV_LABEL_LONG_WRAP);
+
+    if (hexa == NULL) {
+        // Message only
+        lv_obj_t * label_msg = lv_label_create(log_entry);
+        lv_label_set_text(label_msg, message);
+        lv_obj_set_style_text_color(label_msg, lv_color_hex(message_color_hex), 0);
+        lv_obj_set_width(label_msg, LV_SIZE_CONTENT);
+        lv_label_set_long_mode(label_msg, LV_LABEL_LONG_WRAP);
+    } else {
+        // Hexa
+        lv_obj_t * label_hex = lv_label_create(log_entry);
+        lv_label_set_text(label_hex, hexa);
+        lv_obj_set_style_text_color(label_hex, lv_color_hex(hexa_color_hex), 0);
+        lv_obj_set_width(label_hex, LV_PCT(60));
+        lv_obj_set_style_text_font(label_hex, &ui_font_Font1, LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_label_set_long_mode(label_hex, LV_LABEL_LONG_WRAP);
+
+        // Message
+        lv_obj_t * label_msg = lv_label_create(log_entry);
+        lv_label_set_text(label_msg, message);
+        lv_obj_set_style_text_color(label_msg, lv_color_hex(message_color_hex), 0);
+        lv_obj_set_width(label_msg, LV_SIZE_CONTENT);
+        lv_label_set_long_mode(label_msg, LV_LABEL_LONG_WRAP);
+    }
+
+    // Scroll to bottom
+    lv_obj_scroll_to_y(ui_Container1, lv_obj_get_scroll_y(ui_Container1) + 9999, LV_ANIM_OFF);
+
+    // Check if we should remove old entries
+    line_count++;
+    if (line_count > 200) {
+        lv_obj_t * oldest_entry = lv_obj_get_child(ui_Container1, 0);  // Get first log entry container
+        if (oldest_entry) {
+            lv_obj_del(oldest_entry); // Delete entire log entry
+        }
+        line_count--;
+    }
 }

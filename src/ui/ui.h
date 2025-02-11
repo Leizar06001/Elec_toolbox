@@ -18,9 +18,21 @@ extern "C" {
 #include "ui_themes.h"
 
 
-// SCREEN: ui_Screen1
-void ui_Screen1_screen_init(void);
-extern lv_obj_t * ui_Screen1;
+// SCREEN: ui_AppMain
+void ui_AppMain_screen_init(void);
+extern lv_obj_t * ui_AppMain;
+void ui_event_Button1(lv_event_t * e);
+extern lv_obj_t * ui_Button1;
+// CUSTOM VARIABLES
+
+// SCREEN: ui_AppUART
+void add_colored_log(const char* timestamp, uint32_t timestamp_color_hex,
+    const char* hexa,      uint32_t hexa_color_hex,
+    const char* message,   uint32_t message_color_hex);
+    
+void ui_AppUART_screen_init(void);
+void ui_event_AppUART(lv_event_t * e);
+extern lv_obj_t * ui_AppUART;
 void ui_event_baudrate(lv_event_t * e);
 extern lv_obj_t * ui_baudrate;
 void ui_event_SwitchStartStop(lv_event_t * e);
@@ -53,6 +65,8 @@ extern lv_obj_t * uic_SwitchAscii;
 // EVENTS
 
 extern lv_obj_t * ui____initial_actions0;
+
+LV_FONT_DECLARE(ui_font_Font1);
 
 // UI INIT
 void ui_init(void);

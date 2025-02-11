@@ -18,6 +18,9 @@ const ui_theme_variable_t _ui_theme_alpha_ColDev2[1] = {255};
 const ui_theme_variable_t _ui_theme_color_TextColor[1] = {0xFFFFFF};
 const ui_theme_variable_t _ui_theme_alpha_TextColor[1] = {255};
 
+const ui_theme_variable_t _ui_theme_color_hexa[1] = {0xFFD77A};
+const ui_theme_variable_t _ui_theme_alpha_hexa[1] = {255};
+
 uint8_t ui_theme_idx = UI_THEME_DEFAULT;
 
 

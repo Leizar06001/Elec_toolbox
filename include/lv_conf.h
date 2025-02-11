@@ -17,6 +17,8 @@
 #ifndef LV_CONF_H
 #define LV_CONF_H
 
+
+
 /*If you need to include anything here, do it inside the `__ASSEMBLY__` guard */
 #if  0 && defined(__ASSEMBLY__)
 #include "my_include.h"
@@ -45,28 +47,32 @@
 #define LV_USE_STDLIB_SPRINTF   LV_STDLIB_BUILTIN
 
 
-#if LV_USE_STDLIB_MALLOC == LV_STDLIB_BUILTIN
-    /*Size of the memory available for `lv_malloc()` in bytes (>= 2kB)*/
-    #define LV_MEM_SIZE (64 * 1024U)          /*[bytes]*/
+// #if LV_USE_STDLIB_MALLOC == LV_STDLIB_BUILTIN
+//     /*Size of the memory available for `lv_malloc()` in bytes (>= 2kB)*/
+    #define LV_MEM_SIZE (64 * 1024U * 40)          /*[bytes]*/
 
-    /*Size of the memory expand for `lv_malloc()` in bytes*/
-    #define LV_MEM_POOL_EXPAND_SIZE 0
+//     /*Size of the memory expand for `lv_malloc()` in bytes*/
+//     #define LV_MEM_POOL_EXPAND_SIZE 0
 
-    /*Set an address for the memory pool instead of allocating it as a normal array. Can be in external SRAM too.*/
-    #define LV_MEM_ADR 0     /*0: unused*/
-    /*Instead of an address give a memory allocator that will be called to get a memory pool for LVGL. E.g. my_malloc*/
-    #if LV_MEM_ADR == 0
-        #undef LV_MEM_POOL_INCLUDE
-        #undef LV_MEM_POOL_ALLOC
-    #endif
-#endif  /*LV_USE_STDLIB_MALLOC == LV_STDLIB_BUILTIN*/
+//     /*Set an address for the memory pool instead of allocating it as a normal array. Can be in external SRAM too.*/
+//     #define LV_MEM_ADR 0     /*0: unused*/
+//     /*Instead of an address give a memory allocator that will be called to get a memory pool for LVGL. E.g. my_malloc*/
+//     #if LV_MEM_ADR == 0
+//         #undef LV_MEM_POOL_INCLUDE
+//         #undef LV_MEM_POOL_ALLOC
+//     #endif
+// #endif  /*LV_USE_STDLIB_MALLOC == LV_STDLIB_BUILTIN*/
+
+#define LV_MEM_POOL_INCLUDE     "esp_heap_caps.h"
+#define LV_MEM_POOL_ALLOC(size) heap_caps_malloc(size, MALLOC_CAP_SPIRAM)
+
 
 /*====================
    HAL SETTINGS
  *====================*/
 
 /*Default display refresh, input device read and animation step period.*/
-#define LV_DEF_REFR_PERIOD  33      /*[ms]*/
+#define LV_DEF_REFR_PERIOD  20      /*[ms]*/
 
 /*Default Dot Per Inch. Used to initialize default sizes such as widgets sized, style paddings.
  *(Not so important, you can adjust it to modify default sizes and spaces)*/
@@ -208,7 +214,7 @@
  *-----------*/
 
 /*Enable the log module*/
-#define LV_USE_LOG 0
+#define LV_USE_LOG 1
 #if LV_USE_LOG
 
     /*How important log should be added:
@@ -218,11 +224,11 @@
     *LV_LOG_LEVEL_ERROR       Only critical issue, when the system may fail
     *LV_LOG_LEVEL_USER        Only logs added by the user
     *LV_LOG_LEVEL_NONE        Do not log anything*/
-    #define LV_LOG_LEVEL LV_LOG_LEVEL_WARN
+    #define LV_LOG_LEVEL LV_LOG_LEVEL_INFO
 
     /*1: Print the log with 'printf';
     *0: User need to register a callback with `lv_log_register_print_cb()`*/
-    #define LV_LOG_PRINTF 0
+    #define LV_LOG_PRINTF 1
 
     /*1: Enable print timestamp;
      *0: Disable print timestamp*/
@@ -244,6 +250,8 @@
     #define LV_LOG_TRACE_CACHE      1
 
 #endif  /*LV_USE_LOG*/
+
+
 
 /*-------------
  * Asserts
@@ -396,7 +404,7 @@
 #define LV_FONT_MONTSERRAT_20 0
 #define LV_FONT_MONTSERRAT_22 0
 #define LV_FONT_MONTSERRAT_22 0
-#define LV_FONT_MONTSERRAT_24 0
+#define LV_FONT_MONTSERRAT_24 1
 #define LV_FONT_MONTSERRAT_26 0
 #define LV_FONT_MONTSERRAT_28 0
 #define LV_FONT_MONTSERRAT_30 0
