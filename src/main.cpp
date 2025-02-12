@@ -15,6 +15,7 @@ void setup()
     log_i("SDK version: %s", ESP.getSdkVersion());
 
     smartdisplay_init();
+    smartdisplay_lcd_set_backlight(1.0f);
 
     __attribute__((unused)) auto disp = lv_disp_get_default();
 

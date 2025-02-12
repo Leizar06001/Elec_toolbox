@@ -5,15 +5,33 @@
 
 #include "ui.h"
 #include "ui_helpers.h"
+#include "../uart_fnc.h"
 
 ///////////////////// VARIABLES ////////////////////
 
 // SCREEN: ui_AppMain
 void ui_AppMain_screen_init(void);
 lv_obj_t * ui_AppMain;
-void ui_event_Button1(lv_event_t * e);
-lv_obj_t * ui_Button1;
+lv_obj_t * ui_Container2;
+lv_obj_t * ui_Label2;
+lv_obj_t * ui_Container3;
+void ui_event_GoToUART(lv_event_t * e);
+lv_obj_t * ui_GoToUART;
+lv_obj_t * ui_Label5;
+lv_obj_t * ui_imageUART;
+lv_obj_t * ui_GoToNone;
+lv_obj_t * ui_Label6;
+lv_obj_t * ui_GoToNone1;
+lv_obj_t * ui_Label8;
+void ui_event_GoToSettings(lv_event_t * e);
+lv_obj_t * ui_GoToSettings;
+lv_obj_t * ui_Label7;
+lv_obj_t * ui_iamgeSettings;
 // CUSTOM VARIABLES
+lv_obj_t * uic_GoToUART;
+lv_obj_t * uic_GoToNone;
+lv_obj_t * uic_GoToNone;
+lv_obj_t * uic_GoToSettings;
 
 // SCREEN: ui_AppUART
 void ui_AppUART_screen_init(void);
@@ -29,24 +47,47 @@ void ui_event_edevice2(lv_event_t * e);
 lv_obj_t * ui_edevice2;
 lv_obj_t * ui_Spinner;
 lv_obj_t * ui_Container1;
-lv_obj_t * log_spangroup;
-lv_obj_t * log_label;
-void ui_event_SwitchHEX(lv_event_t * e);
-lv_obj_t * ui_SwitchHEX;
-void ui_event_SwitchAscii(lv_event_t * e);
-lv_obj_t * ui_SwitchAscii;
-lv_obj_t * ui_Label3;
-lv_obj_t * ui_Label1;
 lv_obj_t * ui_Label4;
-
+lv_obj_t * ui_BtnUartMenu;
+lv_obj_t * ui_Label9;
+lv_obj_t * ui_SetAscii;
+lv_obj_t * ui_SetHexa;
+lv_obj_t * ui_WinUartSend;
+lv_obj_t * ui_UartKB;
+void ui_event_UartSendTxt(lv_event_t * e);
+lv_obj_t * ui_UartSendTxt;
+lv_obj_t * ui_UartSendDtType;
+lv_obj_t * ui_UartSendDtType1;
 // CUSTOM VARIABLES
 lv_obj_t * uic_baudrate;
 lv_obj_t * uic_SwitchStartStop;
 lv_obj_t * uic_edevice1;
 lv_obj_t * uic_edevice2;
 lv_obj_t * uic_Spinner;
-lv_obj_t * uic_SwitchHEX;
-lv_obj_t * uic_SwitchAscii;
+lv_obj_t * uic_BtnUartMenu;
+lv_obj_t * uic_SetAscii;
+lv_obj_t * uic_SetHexa;
+lv_obj_t * uic_WinUartSend;
+lv_obj_t * uic_UartKB;
+lv_obj_t * uic_UartSendTxt;
+lv_obj_t * uic_UartSendDtType;
+lv_obj_t * uic_UartSendDtType;
+
+// SCREEN: ui_AppSettings
+void ui_AppSettings_screen_init(void);
+void ui_event_AppSettings(lv_event_t * e);
+lv_obj_t * ui_AppSettings;
+void ui_event_setBrightSlide(lv_event_t * e);
+lv_obj_t * ui_setBrightSlide;
+lv_obj_t * ui_Label1;
+lv_obj_t * ui_setBrightLbl;
+lv_obj_t * ui_Container5;
+void ui_event_goBackMainSettings(lv_event_t * e);
+lv_obj_t * ui_goBackMainSettings;
+lv_obj_t * ui_Label3;
+// CUSTOM VARIABLES
+lv_obj_t * uic_setBrightSlide;
+lv_obj_t * uic_setBrightLbl;
 
 // EVENTS
 lv_obj_t * ui____initial_actions0;
@@ -62,22 +103,36 @@ lv_obj_t * ui____initial_actions0;
 
 ///////////////////// FUNCTIONS ////////////////////
 
-void ui_event_AppUART(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-
-    if(event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT) {
-        lv_indev_wait_release(lv_indev_get_act());
-        _ui_screen_change(&ui_AppMain, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 200, 0, &ui_AppMain_screen_init);
-    }
-}
-
-void ui_event_Button1(lv_event_t * e)
+void ui_event_GoToUART(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_RELEASED) {
         _ui_screen_change(&ui_AppUART, LV_SCR_LOAD_ANIM_MOVE_LEFT, 200, 0, &ui_AppUART_screen_init);
+    }
+}
+
+void ui_event_GoToSettings(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_RELEASED) {
+        _ui_screen_change(&ui_AppSettings, LV_SCR_LOAD_ANIM_MOVE_LEFT, 200, 0, &ui_AppSettings_screen_init);
+    }
+}
+
+void ui_event_AppUART(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_active()) == LV_DIR_RIGHT) {
+        lv_indev_wait_release(lv_indev_active());
+        _ui_screen_change(&ui_AppMain, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 200, 0, &ui_AppMain_screen_init);
+        _ui_state_modify(ui_SwitchStartStop, LV_STATE_CHECKED, _UI_MODIFY_STATE_REMOVE);
+        serial_stop();
+    }
+    if(event_code == LV_EVENT_SCREEN_LOADED) {
+        _ui_keyboard_set_target(ui_UartKB,  ui_UartSendTxt);
     }
 }
 
@@ -117,7 +172,16 @@ void ui_event_edevice2(lv_event_t * e)
     }
 }
 
-void ui_event_SwitchHEX(lv_event_t * e)
+void ui_event_SetAscii(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_RELEASED) {
+        sw_ascii(e);
+    }
+}
+
+void ui_event_SetHexa(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -126,12 +190,46 @@ void ui_event_SwitchHEX(lv_event_t * e)
     }
 }
 
-void ui_event_SwitchAscii(lv_event_t * e)
+void ui_event_BtnUartMenu(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_RELEASED) {
-        sw_ascii(e);
+        _ui_flag_modify(ui_WinUartSend, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+        _ui_basic_set_property(ui_Container1, _UI_BASIC_PROPERTY_HEIGHT,  170);
+    }
+}
+
+void ui_event_UartSendTxt(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_CANCEL) {
+        _ui_flag_modify(ui_WinUartSend, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+        _ui_basic_set_property(ui_Container1, _UI_BASIC_PROPERTY_HEIGHT,  430);
+    }
+    if(event_code == LV_EVENT_READY) {
+        UartSendData(e);
+    }
+}
+
+void ui_event_goBackMainSettings(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_RELEASED) {
+        _ui_screen_change(&ui_AppMain, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 200, 0, &ui_AppMain_screen_init);
+    }
+}
+
+void ui_event_setBrightSlide(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+
+    if(event_code == LV_EVENT_VALUE_CHANGED) {
+        _ui_slider_set_text_value(ui_setBrightLbl, target, "", " %");
+        changeBrightness(e);
     }
 }
 

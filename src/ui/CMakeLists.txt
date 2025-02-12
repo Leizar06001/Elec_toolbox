@@ -1,5 +1,6 @@
 SET(SOURCES screens/ui_AppUART.c
     screens/ui_AppMain.c
+    screens/ui_AppSettings.c
     ui_theme_manager.c
     ui_themes.c
     ui.c

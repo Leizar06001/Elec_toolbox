@@ -5,6 +5,7 @@
 
 #include "ui.h"
 #include "../uart_fnc.h"
+#include "../settings.h"
 #include <stdlib.h>
 
 
@@ -63,10 +64,21 @@ void dev2_check(lv_event_t * e)
 
 void sw_hexad(lv_event_t * e)
 {
-	set_output_hexa(lv_obj_has_state(uic_SwitchHEX, LV_STATE_CHECKED));
+	set_output_hexa(lv_obj_has_state(uic_SetHexa, LV_STATE_CHECKED));
 }
 
 void sw_ascii(lv_event_t * e)
 {
-	set_output_ascii(lv_obj_has_state(uic_SwitchAscii, LV_STATE_CHECKED));
+	set_output_ascii(lv_obj_has_state(uic_SetAscii, LV_STATE_CHECKED));
+}
+
+void UartSendData(lv_event_t * e)
+{
+	// Your code here
+}
+
+void changeBrightness(lv_event_t * e)
+{
+	int value = lv_slider_get_value(uic_setBrightSlide);
+	setDisplayBrightness((float)value / 100.0f);
 }

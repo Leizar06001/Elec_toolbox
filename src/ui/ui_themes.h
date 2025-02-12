@@ -15,8 +15,14 @@ extern "C" {
 #define UI_THEME_COLOR_COLDEV2 2
 #define UI_THEME_COLOR_TEXTCOLOR 3
 #define UI_THEME_COLOR_HEXA 4
+#define UI_THEME_COLOR_COLDEV1BG 5
+#define UI_THEME_COLOR_COLDEV2BG 6
+#define UI_THEME_COLOR_BACK 7
 
 #define UI_THEME_DEFAULT 0
+
+extern const ui_theme_variable_t _ui_theme_color_Back[1];
+extern const ui_theme_variable_t _ui_theme_alpha_Back[1];
 
 extern const ui_theme_variable_t _ui_theme_color_Orange[1];
 extern const ui_theme_variable_t _ui_theme_alpha_Orange[1];
@@ -24,8 +30,14 @@ extern const ui_theme_variable_t _ui_theme_alpha_Orange[1];
 extern const ui_theme_variable_t _ui_theme_color_ColDev1[1];
 extern const ui_theme_variable_t _ui_theme_alpha_ColDev1[1];
 
+extern const ui_theme_variable_t _ui_theme_color_ColDev1BG[1];
+extern const ui_theme_variable_t _ui_theme_alpha_ColDev1BG[1];
+
 extern const ui_theme_variable_t _ui_theme_color_ColDev2[1];
 extern const ui_theme_variable_t _ui_theme_alpha_ColDev2[1];
+
+extern const ui_theme_variable_t _ui_theme_color_ColDev2BG[1];
+extern const ui_theme_variable_t _ui_theme_alpha_ColDev2BG[1];
 
 extern const ui_theme_variable_t _ui_theme_color_TextColor[1];
 extern const ui_theme_variable_t _ui_theme_alpha_TextColor[1];

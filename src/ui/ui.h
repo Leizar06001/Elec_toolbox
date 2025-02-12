@@ -21,14 +21,32 @@ extern "C" {
 // SCREEN: ui_AppMain
 void ui_AppMain_screen_init(void);
 extern lv_obj_t * ui_AppMain;
-void ui_event_Button1(lv_event_t * e);
-extern lv_obj_t * ui_Button1;
+extern lv_obj_t * ui_Container2;
+extern lv_obj_t * ui_Label2;
+extern lv_obj_t * ui_Container3;
+void ui_event_GoToUART(lv_event_t * e);
+extern lv_obj_t * ui_GoToUART;
+extern lv_obj_t * ui_Label5;
+extern lv_obj_t * ui_imageUART;
+extern lv_obj_t * ui_GoToNone;
+extern lv_obj_t * ui_Label6;
+extern lv_obj_t * ui_GoToNone1;
+extern lv_obj_t * ui_Label8;
+void ui_event_GoToSettings(lv_event_t * e);
+extern lv_obj_t * ui_GoToSettings;
+extern lv_obj_t * ui_Label7;
+extern lv_obj_t * ui_iamgeSettings;
+// CUSTOM VARIABLES
+extern lv_obj_t * uic_GoToUART;
+extern lv_obj_t * uic_GoToNone;
+extern lv_obj_t * uic_GoToNone;
+extern lv_obj_t * uic_GoToSettings;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_AppUART
 void add_colored_log(const char* timestamp, uint32_t timestamp_color_hex,
     const char* hexa,      uint32_t hexa_color_hex,
-    const char* message,   uint32_t message_color_hex);
+    const char* message,   uint32_t message_color_hex, uint32_t background_color_hex);
     
 void ui_AppUART_screen_init(void);
 void ui_event_AppUART(lv_event_t * e);
@@ -43,29 +61,58 @@ void ui_event_edevice2(lv_event_t * e);
 extern lv_obj_t * ui_edevice2;
 extern lv_obj_t * ui_Spinner;
 extern lv_obj_t * ui_Container1;
-extern lv_obj_t * log_spangroup;
-extern lv_obj_t * log_label;
-void ui_event_SwitchHEX(lv_event_t * e);
-extern lv_obj_t * ui_SwitchHEX;
-void ui_event_SwitchAscii(lv_event_t * e);
-extern lv_obj_t * ui_SwitchAscii;
-extern lv_obj_t * ui_Label3;
-extern lv_obj_t * ui_Label1;
 extern lv_obj_t * ui_Label4;
-
+void ui_event_BtnUartMenu(lv_event_t * e);
+extern lv_obj_t * ui_BtnUartMenu;
+extern lv_obj_t * ui_Label9;
+void ui_event_SetAscii(lv_event_t * e);
+extern lv_obj_t * ui_SetAscii;
+void ui_event_SetHexa(lv_event_t * e);
+extern lv_obj_t * ui_SetHexa;
+extern lv_obj_t * ui_WinUartSend;
+extern lv_obj_t * ui_UartKB;
+void ui_event_UartSendTxt(lv_event_t * e);
+extern lv_obj_t * ui_UartSendTxt;
+extern lv_obj_t * ui_UartSendDtType;
+extern lv_obj_t * ui_UartSendDtType1;
 // CUSTOM VARIABLES
 extern lv_obj_t * uic_baudrate;
 extern lv_obj_t * uic_SwitchStartStop;
 extern lv_obj_t * uic_edevice1;
 extern lv_obj_t * uic_edevice2;
 extern lv_obj_t * uic_Spinner;
-extern lv_obj_t * uic_SwitchHEX;
-extern lv_obj_t * uic_SwitchAscii;
+extern lv_obj_t * uic_BtnUartMenu;
+extern lv_obj_t * uic_SetAscii;
+extern lv_obj_t * uic_SetHexa;
+extern lv_obj_t * uic_WinUartSend;
+extern lv_obj_t * uic_UartKB;
+extern lv_obj_t * uic_UartSendTxt;
+extern lv_obj_t * uic_UartSendDtType;
+extern lv_obj_t * uic_UartSendDtType;
+
+// SCREEN: ui_AppSettings
+void ui_AppSettings_screen_init(void);
+extern lv_obj_t * ui_AppSettings;
+void ui_event_setBrightSlide(lv_event_t * e);
+extern lv_obj_t * ui_setBrightSlide;
+extern lv_obj_t * ui_Label1;
+extern lv_obj_t * ui_setBrightLbl;
+extern lv_obj_t * ui_Container5;
+void ui_event_goBackMainSettings(lv_event_t * e);
+extern lv_obj_t * ui_goBackMainSettings;
+extern lv_obj_t * ui_Label3;
+// CUSTOM VARIABLES
+extern lv_obj_t * uic_setBrightSlide;
+extern lv_obj_t * uic_setBrightLbl;
 
 // EVENTS
-
 extern lv_obj_t * ui____initial_actions0;
 
+// IMAGES AND IMAGE SETS
+LV_IMG_DECLARE(ui_img_uart);    // assets/hiclipart.com.png
+LV_IMG_DECLARE(ui_img_settings_png);    // assets/setting-final.png
+
+// FONTS
 LV_FONT_DECLARE(ui_font_Font1);
 
 // UI INIT
