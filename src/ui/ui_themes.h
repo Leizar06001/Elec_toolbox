@@ -33,11 +33,17 @@ extern const ui_theme_variable_t _ui_theme_alpha_ColDev1[1];
 extern const ui_theme_variable_t _ui_theme_color_ColDev1BG[1];
 extern const ui_theme_variable_t _ui_theme_alpha_ColDev1BG[1];
 
+extern const ui_theme_variable_t _ui_theme_color_ColDev1BG2[1];
+extern const ui_theme_variable_t _ui_theme_alpha_ColDev1BG2[1];
+
 extern const ui_theme_variable_t _ui_theme_color_ColDev2[1];
 extern const ui_theme_variable_t _ui_theme_alpha_ColDev2[1];
 
 extern const ui_theme_variable_t _ui_theme_color_ColDev2BG[1];
 extern const ui_theme_variable_t _ui_theme_alpha_ColDev2BG[1];
+
+extern const ui_theme_variable_t _ui_theme_color_ColDev2BG2[1];
+extern const ui_theme_variable_t _ui_theme_alpha_ColDev2BG2[1];
 
 extern const ui_theme_variable_t _ui_theme_color_TextColor[1];
 extern const ui_theme_variable_t _ui_theme_alpha_TextColor[1];

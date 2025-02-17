@@ -3,6 +3,14 @@
 #include <esp32_smartdisplay.h>
 #include <ui/ui.h>
 #include "uart_fnc.h"
+#include "main.h"
+
+TaskHandle_t uart_task;
+SemaphoreHandle_t serial_mtx;
+
+void uart_read_task(void *pvParameters) {
+    serial_read_sub();
+}
 
 void setup()
 {
@@ -20,7 +28,18 @@ void setup()
     __attribute__((unused)) auto disp = lv_disp_get_default();
 
     ui_init();
+
+    serial_mtx = xSemaphoreCreateMutex();
     
+    xTaskCreatePinnedToCore(
+        uart_read_task,      // Function to execute
+        "Task1",        // Name of task
+        10000,          // Stack size (bytes)
+        NULL,           // Task input parameter
+        5,              // Priority (1 is low, higher number = higher priority)
+        &uart_task,         // Task handle
+        0               // Core 0 (Use 1 for Core 1)
+    );
 }
 
 ulong next_millis;
@@ -32,7 +51,7 @@ void loop()
     if (now > next_millis)
     {
         next_millis = now + 10;
-        serial_read();
+        print_elms_in_list();
 
     }
 

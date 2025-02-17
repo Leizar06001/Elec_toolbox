@@ -1,6 +1,9 @@
 #include "uart_fnc.h"
 #include <Arduino.h>
 #include <ui/ui.h>
+#include "main.h"
+
+t_uart_elm *uart_elm_head = NULL;
 
 #define S1_RX 17
 #define S2_RX 18
@@ -72,17 +75,144 @@ String get_timestamp() {
     return String(tss);;
 }
 
-void print_serial(const char* input, int length, int channel){
-    String timestamp = get_timestamp();
+// void print_serial(const char* input, int length, int channel){
+//     String timestamp = get_timestamp();
+//     uint32_t color;
+//     uint32_t bg_color;
+
+//     static bool darker_1 = false;
+//     static bool darker_2 = false;
+
+//     // Alternate the background color to make it easier to read
+//     if (channel == 1) {
+//         color = _ui_theme_color_ColDev1[0];
+//         if (darker_1){
+//             bg_color = _ui_theme_color_ColDev1BG2[0];
+//         } else {
+//             bg_color = _ui_theme_color_ColDev1BG[0];
+//         }
+//         darker_1 = !darker_1;
+//     } else {
+//         color = _ui_theme_color_ColDev2[0];
+//         if (darker_2){
+//             bg_color = _ui_theme_color_ColDev2BG2[0];
+//         } else {
+//             bg_color = _ui_theme_color_ColDev2BG[0];
+//         }
+//         darker_2 = !darker_2;
+//     }
+
+//     // If print_hexa, we must cut the message in HEX_CNT characters
+//     // Print the hex values followed by the ASCII values, then do it until the end of the message
+//     if (print_hexa) {
+//         for (int i = 0; i < length; i += HEX_CNT) {
+//             String log_message = "";
+//             String log_hex = "";
+
+//             // Print the HEX values
+//             for (int j = 0; j < HEX_CNT; j++) {
+//                 if (i + j < length) {
+//                     char hex[4];
+//                     sprintf(hex, "%02X ", input[i + j]);
+//                     log_hex += hex;
+//                 }
+//             }
+//             if (print_ascii) {
+//                 log_message = "| ";
+//                 // Print the ASCII values
+//                 for (int j = 0; j < HEX_CNT; j++) {
+//                     if (i + j < length) {
+//                         char ascii[2];
+//                         ascii[0] = input[i + j];
+//                         ascii[1] = '\0';
+//                         log_message += ascii;
+//                     }
+//                 }
+//             }
+
+//             add_colored_log(timestamp.c_str(),  color, 
+//                             log_hex.c_str(),    _ui_theme_color_hexa[0],
+//                             log_message.c_str(),_ui_theme_color_TextColor[0],
+//                             bg_color);
+//         }
+//     } else {
+//         if (print_ascii) {
+//             add_colored_log(timestamp.c_str(), color, NULL, 0,
+//                                 input,      _ui_theme_color_TextColor[0], bg_color);
+//         }
+//     }
+// }
+
+// void serial_read() {
+//     if (serial_state == 0) return;
+//     static int prev_state = 0;
+
+//     if (prev_state != serial_state) {
+//         serial_flush();
+//         prev_state = serial_state;
+//     }
+
+//     // DEVICE 1
+//     int len = 0;
+//     String input = "";
+//     if (read_dev1){
+//         while (Serial1.available())
+//         {
+//             char c = Serial1.read();
+//             input += c;
+//             len++;
+//         }
+//         if (len > 0){
+//             print_serial(input.c_str(), len, 1);
+
+//             Serial.print("1> ");
+//             Serial.println(input);
+//         }
+//     }
+
+//     // DEVICE 2
+//     len = 0;
+//     input = "";
+//     if (read_dev2){
+//         while (Serial2.available())
+//         {
+//             char c = Serial2.read();
+//             input += c;
+//             len++;
+//         }
+//         if (len > 0){
+//             print_serial(input.c_str(), len, 2);
+
+//             Serial.print("2> ");
+//             Serial.println(input);
+//         }
+//     }
+// }
+
+void print_serial2(const char* timestamp, const char* input, int length, int channel){
     uint32_t color;
     uint32_t bg_color;
 
+    static bool darker_1 = false;
+    static bool darker_2 = false;
+
+    // Alternate the background color to make it easier to read
     if (channel == 1) {
         color = _ui_theme_color_ColDev1[0];
-        bg_color = _ui_theme_color_ColDev1BG[0];
+        if (darker_1){
+            bg_color = _ui_theme_color_ColDev1BG2[0];
+        } else {
+            bg_color = _ui_theme_color_ColDev1BG[0];
+        }
+        darker_1 = !darker_1;
     } else {
         color = _ui_theme_color_ColDev2[0];
-        bg_color = _ui_theme_color_ColDev2BG[0];
+        if (darker_2){
+            bg_color = _ui_theme_color_ColDev2BG2[0];
+        } else {
+            bg_color = _ui_theme_color_ColDev2BG[0];
+        }
+        darker_2 = !darker_2;
     }
 
     // If print_hexa, we must cut the message in HEX_CNT characters
@@ -113,61 +243,114 @@ void print_serial(const char* input, int length, int channel){
                 }
             }
 
-            add_colored_log(timestamp.c_str(),  color, 
+            add_colored_log(timestamp,  color, 
                             log_hex.c_str(),    _ui_theme_color_hexa[0],
                             log_message.c_str(),_ui_theme_color_TextColor[0],
                             bg_color);
         }
     } else {
         if (print_ascii) {
-            add_colored_log(timestamp.c_str(), color, NULL, 0,
+            add_colored_log(timestamp, color, NULL, 0,
                                 input,      _ui_theme_color_TextColor[0], bg_color);
         }
     }
 }
 
-void serial_read() {
-    if (serial_state == 0) return;
-    static int prev_state = 0;
-
-    if (prev_state != serial_state) {
-        serial_flush();
-        prev_state = serial_state;
+void print_elms_in_list(){
+    xSemaphoreTake(serial_mtx, portMAX_DELAY);
+    t_uart_elm *current = uart_elm_head;
+    while (current != NULL) {
+        print_serial2(current->timestamp, current->input, current->len, current->channel);
+        t_uart_elm *temp = current;
+        current = current->next;
+        free(temp->input);
+        free(temp->timestamp);
+        free(temp);
     }
+    uart_elm_head = NULL;
+    xSemaphoreGive(serial_mtx);
+}
 
-    // DEVICE 1
-    int len = 0;
-    String input = "";
-    if (read_dev1){
-        while (Serial1.available())
-        {
-            char c = Serial1.read();
-            input += c;
-            len++;
-        }
-        if (len > 0){
-            print_serial(input.c_str(), len, 1);
-
-            Serial.print("1> ");
-            Serial.println(input);
-        }
+void add_elm_to_list(String timestamp, char *input, int len, int channel) {
+    t_uart_elm *new_elm = (t_uart_elm *)malloc(sizeof(t_uart_elm));
+    new_elm->len = len;
+    new_elm->channel = channel;
+    new_elm->next = NULL;
+    
+    new_elm->timestamp = (char*)malloc(timestamp.length() + 1);
+    if (new_elm->timestamp == NULL) {
+        free(new_elm);
+        return;
     }
+    strcpy(new_elm->timestamp, timestamp.c_str());
 
-    // DEVICE 2
-    len = 0;
-    input = "";
-    if (read_dev2){
-        while (Serial2.available())
-        {
-            char c = Serial2.read();
-            input += c;
-            len++;
-        }
-        if (len > 0){
-            print_serial(input.c_str(), len, 2);
+    new_elm->input = (char*)malloc(len);
+    if (new_elm->input == NULL) {
+        free(new_elm->timestamp);
+        free(new_elm);
+        return;
+    }
+    memcpy(new_elm->input, input, len);
 
-            Serial.print("2> ");
-            Serial.println(input);
+    xSemaphoreTake(serial_mtx, portMAX_DELAY);
+    if (uart_elm_head == NULL) {
+        uart_elm_head = new_elm;
+    } else {
+        t_uart_elm *current = uart_elm_head;
+        while (current->next != NULL) {
+            current = current->next;
         }
+        current->next = new_elm;
+    }
+    xSemaphoreGive(serial_mtx);
+}
+
+
+
+void serial_read_sub() {
+    int prev_state = 0;
+
+    while (1){
+        if (serial_state == 0) {
+            vTaskDelay(100 / portTICK_PERIOD_MS);
+            continue;
+        }
+
+        // If we just started reading, flush the serial buffer
+        if (prev_state != serial_state) {
+            serial_flush();
+            prev_state = serial_state;
+        }
+
+        // DEVICE 1
+        int len = 0;
+        String input = "";
+        if (read_dev1){
+            while (Serial1.available())
+            {
+                char c = Serial1.read();
+                input += c;
+                len++;
+            }
+            if (len > 0){
+                add_elm_to_list(get_timestamp(), (char*)input.c_str(), len, 1);
+            }
+        }
+
+        // DEVICE 2
+        len = 0;
+        input = "";
+        if (read_dev2){
+            while (Serial2.available())
+            {
+                char c = Serial2.read();
+                input += c;
+                len++;
+            }
+            if (len > 0){
+                add_elm_to_list(get_timestamp(), (char*)input.c_str(), len, 2);
+            }
+        }
+        vTaskDelay(10);
     }
 }

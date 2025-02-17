@@ -294,6 +294,7 @@ void add_colored_log(const char* timestamp, uint32_t timestamp_color_hex,
     lv_obj_set_flex_align(log_entry, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START);
     lv_obj_set_style_pad_all(log_entry, 0, 0);  // Optional: Adjust spacing
     lv_obj_set_style_pad_column(log_entry, 0, 0);  // Optional: Adjust spacing
+    lv_obj_set_style_pad_top(log_entry, 3, 0);  // Optional: Adjust spacing
     lv_obj_set_style_border_width(log_entry, 0, 0);
     lv_obj_set_style_bg_color(log_entry, lv_color_hex(background_color_hex), 0); // Dark background
     lv_obj_set_style_bg_opa(log_entry, LV_OPA_MAX, 0); // Transparent background
@@ -345,7 +346,7 @@ void add_colored_log(const char* timestamp, uint32_t timestamp_color_hex,
 
     // Check if we should remove old entries
     line_count++;
-    if (line_count > 200) {
+    while (line_count > 200) {
         lv_obj_t * oldest_entry = lv_obj_get_child(ui_Container1, 0);  // Get first log entry container
         if (oldest_entry) {
             lv_obj_del(oldest_entry); // Delete entire log entry
