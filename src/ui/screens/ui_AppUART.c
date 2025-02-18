@@ -98,67 +98,47 @@ void ui_AppUART_screen_init(void)
     ui_object_set_themeable_style_property(ui_edevice2, LV_PART_INDICATOR | LV_STATE_CHECKED, LV_STYLE_BG_OPA,
                                         _ui_theme_alpha_ColDev2);
 
-// *********** SWITCH ASCII / HEX ***********
+// *********** SEND ***********                                            
+                                                
+    ui_BtnUartSend = lv_button_create(ui_AppUART);
+    lv_obj_set_width(ui_BtnUartSend, 120);
+    lv_obj_set_height(ui_BtnUartSend, 34);
+    lv_obj_set_x(ui_BtnUartSend, 157);
+    lv_obj_set_y(ui_BtnUartSend, 215);
+    lv_obj_set_align(ui_BtnUartSend, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_BtnUartSend, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_remove_flag(ui_BtnUartSend, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_radius(ui_BtnUartSend, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_object_set_themeable_style_property(ui_BtnUartSend, LV_PART_MAIN | LV_STATE_DEFAULT, LV_STYLE_BG_COLOR,
+                                        _ui_theme_color_Orange);
+    ui_object_set_themeable_style_property(ui_BtnUartSend, LV_PART_MAIN | LV_STATE_DEFAULT, LV_STYLE_BG_OPA,
+                                        _ui_theme_alpha_Orange);
 
-ui_SetAscii = lv_checkbox_create(ui_AppUART);
-    lv_checkbox_set_text(ui_SetAscii, "Ascii ");
-    lv_obj_set_width(ui_SetAscii, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_SetAscii, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_SetAscii, -25);
-    lv_obj_set_y(ui_SetAscii, 215);
-    lv_obj_set_align(ui_SetAscii, LV_ALIGN_CENTER);
-    lv_obj_add_state(ui_SetAscii, LV_STATE_CHECKED);       /// States
-    lv_obj_add_flag(ui_SetAscii, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    ui_Label9 = lv_label_create(ui_BtnUartSend);
+    lv_obj_set_width(ui_Label9, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Label9, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_Label9, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Label9, "SEND");
 
-    ui_object_set_themeable_style_property(ui_SetAscii, LV_PART_INDICATOR | LV_STATE_DEFAULT, LV_STYLE_BORDER_COLOR,
-                                           _ui_theme_color_Orange);
-    ui_object_set_themeable_style_property(ui_SetAscii, LV_PART_INDICATOR | LV_STATE_DEFAULT, LV_STYLE_BORDER_OPA,
-                                           _ui_theme_alpha_Orange);
-    ui_object_set_themeable_style_property(ui_SetAscii, LV_PART_INDICATOR | LV_STATE_CHECKED, LV_STYLE_BG_COLOR,
-                                           _ui_theme_color_Orange);
-    ui_object_set_themeable_style_property(ui_SetAscii, LV_PART_INDICATOR | LV_STATE_CHECKED, LV_STYLE_BG_OPA,
-                                           _ui_theme_alpha_Orange);
+// *********** MENU ***********   
 
-    ui_SetHexa = lv_checkbox_create(ui_AppUART);
-    lv_checkbox_set_text(ui_SetHexa, "HEX  ");
-    lv_obj_set_width(ui_SetHexa, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_SetHexa, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_SetHexa, 50);
-    lv_obj_set_y(ui_SetHexa, 215);
-    lv_obj_set_align(ui_SetHexa, LV_ALIGN_CENTER);
-    lv_obj_add_state(ui_SetHexa, LV_STATE_CHECKED);       /// States
-    lv_obj_add_flag(ui_SetHexa, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-
-    ui_object_set_themeable_style_property(ui_SetHexa, LV_PART_INDICATOR | LV_STATE_DEFAULT, LV_STYLE_BORDER_COLOR,
-                                           _ui_theme_color_Orange);
-    ui_object_set_themeable_style_property(ui_SetHexa, LV_PART_INDICATOR | LV_STATE_DEFAULT, LV_STYLE_BORDER_OPA,
-                                           _ui_theme_alpha_Orange);
-    ui_object_set_themeable_style_property(ui_SetHexa, LV_PART_INDICATOR | LV_STATE_CHECKED, LV_STYLE_BG_COLOR,
-                                           _ui_theme_color_Orange);
-    ui_object_set_themeable_style_property(ui_SetHexa, LV_PART_INDICATOR | LV_STATE_CHECKED, LV_STYLE_BG_OPA,
-                                           _ui_theme_alpha_Orange);
-
-// *********** MENU ***********                                            
-                                            
     ui_BtnUartMenu = lv_button_create(ui_AppUART);
     lv_obj_set_width(ui_BtnUartMenu, 120);
     lv_obj_set_height(ui_BtnUartMenu, 34);
-    lv_obj_set_x(ui_BtnUartMenu, 157);
+    lv_obj_set_x(ui_BtnUartMenu, 10);
     lv_obj_set_y(ui_BtnUartMenu, 215);
     lv_obj_set_align(ui_BtnUartMenu, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_BtnUartMenu, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_remove_flag(ui_BtnUartMenu, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_radius(ui_BtnUartMenu, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
-    ui_object_set_themeable_style_property(ui_BtnUartMenu, LV_PART_MAIN | LV_STATE_DEFAULT, LV_STYLE_BG_COLOR,
-                                            _ui_theme_color_Orange);
-    ui_object_set_themeable_style_property(ui_BtnUartMenu, LV_PART_MAIN | LV_STATE_DEFAULT, LV_STYLE_BG_OPA,
-                                            _ui_theme_alpha_Orange);
+    lv_obj_set_style_bg_color(ui_BtnUartMenu, lv_color_hex(0xFF5900), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_BtnUartMenu, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Label9 = lv_label_create(ui_BtnUartMenu);
-    lv_obj_set_width(ui_Label9, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label9, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label9, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label9, "MENU");
+    ui_Label15 = lv_label_create(ui_BtnUartMenu);
+    lv_obj_set_width(ui_Label15, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Label15, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_Label15, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Label15, "MENU");
 
 // *********** SPINER ***********
 
@@ -257,9 +237,8 @@ ui_SetAscii = lv_checkbox_create(ui_AppUART);
     lv_obj_add_event_cb(ui_SwitchStartStop, ui_event_SwitchStartStop, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_edevice1, ui_event_edevice1, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_edevice2, ui_event_edevice2, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_BtnUartSend, ui_event_BtnUartSend, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_BtnUartMenu, ui_event_BtnUartMenu, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_SetAscii, ui_event_SetAscii, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_SetHexa, ui_event_SetHexa, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_UartSendTxt, ui_event_UartSendTxt, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_AppUART, ui_event_AppUART, LV_EVENT_ALL, NULL);
     uic_baudrate = ui_baudrate;
@@ -268,8 +247,6 @@ ui_SetAscii = lv_checkbox_create(ui_AppUART);
     uic_edevice2 = ui_edevice2;
     uic_Spinner = ui_Spinner;
     uic_BtnUartMenu = ui_BtnUartMenu;
-    uic_SetAscii = ui_SetAscii;
-    uic_SetHexa = ui_SetHexa;
     uic_WinUartSend = ui_WinUartSend;
     uic_UartKB = ui_UartKB;
     uic_UartSendTxt = ui_UartSendTxt;

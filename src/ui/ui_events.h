@@ -14,10 +14,10 @@ void change_baudrate(lv_event_t * e);
 void start_stop(lv_event_t * e);
 void dev1_check(lv_event_t * e);
 void dev2_check(lv_event_t * e);
-void sw_hexad(lv_event_t * e);
-void sw_ascii(lv_event_t * e);
 void UartSendData(lv_event_t * e);
 void changeBrightness(lv_event_t * e);
+void cb_loadUartSettings(lv_event_t * e);
+void cb_saveUartSettings(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

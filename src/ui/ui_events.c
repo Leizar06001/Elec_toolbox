@@ -62,15 +62,15 @@ void dev2_check(lv_event_t * e)
 	set_device(2, lv_obj_has_state(uic_edevice2, LV_STATE_CHECKED));
 }
 
-void sw_hexad(lv_event_t * e)
-{
-	set_output_hexa(lv_obj_has_state(uic_SetHexa, LV_STATE_CHECKED));
-}
+// void sw_hexad(lv_event_t * e)
+// {
+// 	set_output_hexa(lv_obj_has_state(uic_SetHexa, LV_STATE_CHECKED));
+// }
 
-void sw_ascii(lv_event_t * e)
-{
-	set_output_ascii(lv_obj_has_state(uic_SetAscii, LV_STATE_CHECKED));
-}
+// void sw_ascii(lv_event_t * e)
+// {
+// 	set_output_ascii(lv_obj_has_state(uic_SetAscii, LV_STATE_CHECKED));
+// }
 
 void UartSendData(lv_event_t * e)
 {
@@ -81,4 +81,36 @@ void changeBrightness(lv_event_t * e)
 {
 	int value = lv_slider_get_value(uic_setBrightSlide);
 	setDisplayBrightness((float)value / 100.0f);
+}
+
+void cb_saveUartSettings(lv_event_t * e)
+{
+	// Save the settings
+	
+	set_output_ascii(lv_obj_has_state(uic_SetAscii, LV_STATE_CHECKED));
+	set_output_hexa(lv_obj_has_state(uic_SetHexa, LV_STATE_CHECKED));
+	set_pullups(lv_obj_has_state(uic_SetPullups, LV_STATE_CHECKED));
+}
+
+void cb_loadUartSettings(lv_event_t * e)
+{
+	// Get the actual settings and update the UI
+
+	if (get_output_ascii()) {
+		lv_obj_add_state(uic_SetAscii, LV_STATE_CHECKED);
+	} else {
+		lv_obj_clear_state(uic_SetAscii, LV_STATE_CHECKED);
+	}
+
+	if (get_output_hexa()) {
+		lv_obj_add_state(uic_SetHexa, LV_STATE_CHECKED);
+	} else {
+		lv_obj_clear_state(uic_SetHexa, LV_STATE_CHECKED);
+	}
+
+	if (get_pullups()) {
+		lv_obj_add_state(uic_SetPullups, LV_STATE_CHECKED);
+	} else {
+		lv_obj_clear_state(uic_SetPullups, LV_STATE_CHECKED);
+	}
 }

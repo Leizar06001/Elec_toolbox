@@ -43,6 +43,27 @@ extern lv_obj_t * uic_GoToNone;
 extern lv_obj_t * uic_GoToSettings;
 // CUSTOM VARIABLES
 
+
+
+// SCREEN: ui_AppSettings
+void ui_AppSettings_screen_init(void);
+extern lv_obj_t * ui_AppSettings;
+void ui_event_setBrightSlide(lv_event_t * e);
+extern lv_obj_t * ui_setBrightSlide;
+extern lv_obj_t * ui_Label1;
+extern lv_obj_t * ui_setBrightLbl;
+extern lv_obj_t * ui_Container5;
+void ui_event_goBackMainSettings(lv_event_t * e);
+extern lv_obj_t * ui_goBackMainSettings;
+extern lv_obj_t * ui_Label3;
+// CUSTOM VARIABLES
+extern lv_obj_t * uic_setBrightSlide;
+extern lv_obj_t * uic_setBrightLbl;
+
+
+
+
+
 // SCREEN: ui_AppUART
 void add_colored_log(const char* timestamp, uint32_t timestamp_color_hex,
     const char* hexa,      uint32_t hexa_color_hex,
@@ -62,13 +83,12 @@ extern lv_obj_t * ui_edevice2;
 extern lv_obj_t * ui_Spinner;
 extern lv_obj_t * ui_Container1;
 extern lv_obj_t * ui_Label4;
+void ui_event_BtnUartSend(lv_event_t * e);
+extern lv_obj_t * ui_BtnUartSend;
+extern lv_obj_t * ui_Label9;
 void ui_event_BtnUartMenu(lv_event_t * e);
 extern lv_obj_t * ui_BtnUartMenu;
-extern lv_obj_t * ui_Label9;
-void ui_event_SetAscii(lv_event_t * e);
-extern lv_obj_t * ui_SetAscii;
-void ui_event_SetHexa(lv_event_t * e);
-extern lv_obj_t * ui_SetHexa;
+extern lv_obj_t * ui_Label15;
 extern lv_obj_t * ui_WinUartSend;
 extern lv_obj_t * ui_UartKB;
 void ui_event_UartSendTxt(lv_event_t * e);
@@ -81,29 +101,41 @@ extern lv_obj_t * uic_SwitchStartStop;
 extern lv_obj_t * uic_edevice1;
 extern lv_obj_t * uic_edevice2;
 extern lv_obj_t * uic_Spinner;
+extern lv_obj_t * uic_BtnUartSend;
 extern lv_obj_t * uic_BtnUartMenu;
-extern lv_obj_t * uic_SetAscii;
-extern lv_obj_t * uic_SetHexa;
 extern lv_obj_t * uic_WinUartSend;
 extern lv_obj_t * uic_UartKB;
 extern lv_obj_t * uic_UartSendTxt;
 extern lv_obj_t * uic_UartSendDtType;
 extern lv_obj_t * uic_UartSendDtType;
 
-// SCREEN: ui_AppSettings
-void ui_AppSettings_screen_init(void);
-extern lv_obj_t * ui_AppSettings;
-void ui_event_setBrightSlide(lv_event_t * e);
-extern lv_obj_t * ui_setBrightSlide;
-extern lv_obj_t * ui_Label1;
-extern lv_obj_t * ui_setBrightLbl;
-extern lv_obj_t * ui_Container5;
-void ui_event_goBackMainSettings(lv_event_t * e);
-extern lv_obj_t * ui_goBackMainSettings;
-extern lv_obj_t * ui_Label3;
+
+
+// SCREEN: ui_AppUARTsettings
+void ui_AppUARTsettings_screen_init(void);
+void ui_event_AppUARTsettings(lv_event_t * e);
+extern lv_obj_t * ui_AppUARTsettings;
+extern lv_obj_t * ui_UartSettingsTop;
+extern lv_obj_t * ui_Label11;
+extern lv_obj_t * ui_UartSettingsBottom;
+void ui_event_goBackUartCancel(lv_event_t * e);
+extern lv_obj_t * ui_goBackUartCancel;
+extern lv_obj_t * ui_Label12;
+void ui_event_goBackUartSave(lv_event_t * e);
+extern lv_obj_t * ui_goBackUartSave;
+extern lv_obj_t * ui_Label10;
+extern lv_obj_t * ui_Container4;
+extern lv_obj_t * ui_SetAscii2;
+extern lv_obj_t * ui_SetHexa2;
+extern lv_obj_t * ui_Label13;
+extern lv_obj_t * ui_Container6;
+extern lv_obj_t * ui_SetPullups;
+extern lv_obj_t * ui_Label14;
 // CUSTOM VARIABLES
-extern lv_obj_t * uic_setBrightSlide;
-extern lv_obj_t * uic_setBrightLbl;
+extern lv_obj_t * uic_SetAscii;
+extern lv_obj_t * uic_SetHexa;
+extern lv_obj_t * uic_SetPullups;
+
 
 // EVENTS
 extern lv_obj_t * ui____initial_actions0;

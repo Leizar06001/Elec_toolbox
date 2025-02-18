@@ -17,12 +17,16 @@ typedef struct s_uart_elm {
 
 void serial_start(int baudrate);
 void serial_stop();
-void serial_read();
 void serial_read_sub();
+
+bool get_output_hexa();
+bool get_output_ascii();
+bool get_pullups();
 
 void set_device(int device, bool state);
 void set_output_hexa(bool state);
 void set_output_ascii(bool state);
+void set_pullups(bool state);
 
 void serial_prt(const char *str);
 

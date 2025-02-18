@@ -30,3 +30,11 @@ def UartSendData(event_struct):
 def changeBrightness(event_struct):
     return
 
+
+def cb_saveUartSettings(event_struct):
+    return
+
+
+def cb_loadUartSettings(event_struct):
+    return
+
