@@ -41,7 +41,7 @@ void ui_AppUART_screen_init(void)
     lv_obj_set_x(ui_SwitchStartStop, 315);
     lv_obj_set_y(ui_SwitchStartStop, 215);
     lv_obj_set_align(ui_SwitchStartStop, LV_ALIGN_CENTER);
-    // lv_obj_add_state(ui_SwitchStartStop, LV_STATE_CHECKED);       /// States
+    lv_obj_add_state(ui_SwitchStartStop, LV_STATE_CHECKED);       /// States
 
     ui_object_set_themeable_style_property(ui_SwitchStartStop, LV_PART_INDICATOR | LV_STATE_CHECKED, LV_STYLE_BG_COLOR,
                                            _ui_theme_color_Orange);

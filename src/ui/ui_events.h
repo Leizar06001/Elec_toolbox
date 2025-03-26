@@ -11,6 +11,7 @@ extern "C" {
 #endif
 
 void change_baudrate(lv_event_t * e);
+void cb_initAppUart(lv_event_t * e);
 void start_stop(lv_event_t * e);
 void dev1_check(lv_event_t * e);
 void dev2_check(lv_event_t * e);

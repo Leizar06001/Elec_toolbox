@@ -161,8 +161,11 @@ void print_serial2(const char* timestamp, const char* input, int length, int cha
         }
     } else {
         if (print_ascii) {
+            char msg[128];
+            strncpy(msg, input, length);
+            msg[length] = '\0';
             add_colored_log(timestamp, color, NULL, 0,
-                                input,      _ui_theme_color_TextColor[0], bg_color);
+                            msg,      _ui_theme_color_TextColor[0], bg_color);
         }
     }
 }

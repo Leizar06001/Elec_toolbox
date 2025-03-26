@@ -166,8 +166,9 @@ void ui_event_AppUART(lv_event_t * e)
         _ui_state_modify(ui_SwitchStartStop, LV_STATE_CHECKED, _UI_MODIFY_STATE_REMOVE);
         serial_stop();
     }
-    if(event_code == LV_EVENT_SCREEN_LOADED) {
+    if(event_code == LV_EVENT_SCREEN_LOAD_START) {
         _ui_keyboard_set_target(ui_UartKB,  ui_UartSendTxt);
+        cb_initAppUart(e);
     }
 }
 
@@ -262,7 +263,7 @@ void ui_event_goBackUartSave(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_RELEASED) {
-        _ui_screen_change(&ui_AppMain, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 200, 0, &ui_AppMain_screen_init);
+        _ui_screen_change(&ui_AppUART, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 200, 0, &ui_AppUART_screen_init);
     }
     if(event_code == LV_EVENT_RELEASED) {
         cb_saveUartSettings(e);

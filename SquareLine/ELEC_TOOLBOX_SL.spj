@@ -3592,7 +3592,6 @@
               },
               {
                 "nid": 90,
-                "flags": 1048576,
                 "strtype": "OBJECT/Flags",
                 "InheritedType": 1
               },
@@ -3600,6 +3599,12 @@
                 "nid": 320,
                 "strtype": "OBJECT/States",
                 "InheritedType": 1
+              },
+              {
+                "nid": 330,
+                "strtype": "OBJECT/Checked",
+                "strval": "True",
+                "InheritedType": 2
               },
               {
                 "part": "lv.PART.MAIN",
@@ -6544,7 +6549,7 @@
             "disabled": false,
             "nid": 1000359,
             "strtype": "_event/EventHandler",
-            "strval": "SCREEN_LOADED",
+            "strval": "SCREEN_LOAD_START",
             "childs": [
               {
                 "nid": 1000360,
@@ -6598,6 +6603,44 @@
                     "strtype": "KEYBOARD SET TARGET/TextArea",
                     "strval": "GUID37331721-836880S80443",
                     "InheritedType": 9
+                  }
+                ],
+                "InheritedType": 10
+              },
+              {
+                "nid": 1000488,
+                "strtype": "_event/action",
+                "strval": "CALL FUNCTION",
+                "childs": [
+                  {
+                    "nid": 1000489,
+                    "strtype": "CALL FUNCTION/Name",
+                    "strval": "CALL FUNCTION",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1000490,
+                    "strtype": "CALL FUNCTION/Call",
+                    "strval": "<{Function_name}>( event_struct )",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1000491,
+                    "strtype": "CALL FUNCTION/CallC",
+                    "strval": "<{Function_name}>( e );",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1000492,
+                    "strtype": "CALL FUNCTION/Function_name",
+                    "strval": "cb_initAppUart",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1000493,
+                    "strtype": "CALL FUNCTION/Dont_export_function",
+                    "strval": "False",
+                    "InheritedType": 2
                   }
                 ],
                 "InheritedType": 10
@@ -9095,7 +9138,7 @@
     "uiExportFolderPath": "C:\\Users\\r.loussignian\\Documents\\lvgl_esp\\ui",
     "projectExportFolderPath": "C:\\Users\\r.loussignian\\Documents\\lvgl_esp",
     "custom_variable_prefix": "uic",
-    "backup_cnt": 14,
+    "backup_cnt": 15,
     "autosave_cnt": 0,
     "lvgl_version": "9.1.0",
     "callfuncsexport": "C_FILE",
@@ -9111,7 +9154,7 @@
     "drive_fatfs_path": "",
     "naming": "Name",
     "naming_force_lowercase": false,
-    "nidcnt": 1000488,
+    "nidcnt": 1000494,
     "BitDepth": 16,
     "Name": "SquareLine_Project"
   }

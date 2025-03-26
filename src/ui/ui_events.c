@@ -8,7 +8,6 @@
 #include "../settings.h"
 #include <stdlib.h>
 
-
 long get_selected_baudrate()
 {
 	char selected[16];
@@ -31,12 +30,8 @@ void change_baudrate(lv_event_t * e)
 	serial_start(baudrate);
 }
 
-void start_stop(lv_event_t * e)
-{
-	lv_obj_t * obj = lv_event_get_target(e);
-
-	// Start reading from the serial port
-	if (lv_obj_has_state(obj, LV_STATE_CHECKED)) {
+static void start_stop_uart(){
+	if (lv_obj_has_state(uic_SwitchStartStop, LV_STATE_CHECKED)) {
 		long baudrate = get_selected_baudrate();
 
 		if (baudrate < 0 || baudrate > 115200) {
@@ -46,10 +41,14 @@ void start_stop(lv_event_t * e)
 		serial_stop();
 		serial_start(baudrate);
 
-	// Stop reading from the serial port
 	} else {
 		serial_stop();
 	}
+}
+
+void start_stop(lv_event_t * e)
+{
+	start_stop_uart();
 }
 
 void dev1_check(lv_event_t * e)
@@ -61,16 +60,6 @@ void dev2_check(lv_event_t * e)
 {
 	set_device(2, lv_obj_has_state(uic_edevice2, LV_STATE_CHECKED));
 }
-
-// void sw_hexad(lv_event_t * e)
-// {
-// 	set_output_hexa(lv_obj_has_state(uic_SetHexa, LV_STATE_CHECKED));
-// }
-
-// void sw_ascii(lv_event_t * e)
-// {
-// 	set_output_ascii(lv_obj_has_state(uic_SetAscii, LV_STATE_CHECKED));
-// }
 
 void UartSendData(lv_event_t * e)
 {
@@ -113,4 +102,9 @@ void cb_loadUartSettings(lv_event_t * e)
 	} else {
 		lv_obj_clear_state(uic_SetPullups, LV_STATE_CHECKED);
 	}
+}
+
+void cb_initAppUart(lv_event_t * e)
+{
+	start_stop_uart();
 }
